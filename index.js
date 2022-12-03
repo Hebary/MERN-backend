@@ -22,7 +22,7 @@ app.use("/api/projects", projectRoutes); //4°
 app.use("/api/task", taskRoutes); //4°
 
 
-const PORT = process.env.PORT || 3000; 
+const PORT = process.env.PORT || 3800; 
 
 const server = app.listen(PORT, () => {
      console.log(`MERN app listening on port ${PORT}!`);
@@ -34,10 +34,13 @@ import { Server } from "socket.io"
 const io = new Server(server,{
     pingTimeout: 60000,
     pingInterval: 25000,
-    cors:{
-        origin: "*"
-    },
-})
+    cors: {
+        origin: '*',
+        methods: ['GET', 'POST'],
+        credentials: true
+        
+    }
+});
 
 io.on("connection", (socket)=> {
     console.log("connected to socket.io")
