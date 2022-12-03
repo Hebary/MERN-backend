@@ -2,7 +2,7 @@
 
 
  _An Project Manager MERN App  
- builded with Node.js, Express, SocketIO, JWT, Mongoose, bcrypt, and more!_🛠️
+ builded with Node.js, Express, SocketIO, JWT, Mongoose, bcrypt, and more!🛠️ _
 
 
 
