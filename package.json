@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "the upTask back using express & node",
+  "description": "the upTask backend using node, express and mongoose",
   "type": "module",
   "main": "index.js",
   "scripts": {
