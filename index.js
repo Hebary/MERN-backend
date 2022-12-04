@@ -35,7 +35,7 @@ const io = new Server(server,{
     pingTimeout: 60000,
     pingInterval: 25000,
     cors: {
-        origin: '*',
+        origin: 'https://majestic-toffee-02bb7d.netlify.app',
         methods: ['GET', 'POST'],
         credentials: true
         
