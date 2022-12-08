@@ -24,7 +24,7 @@ const registry = async (req,res) => {
             name:user.name,
             token:user.token
         });
-        res.status(200).json({msg:"User created successfully, check your email to confirm your account"});
+        res.status(200).json({msg:"User created successfully"});
     } catch (err) {
         console.log(err);
     }
@@ -76,6 +76,7 @@ const confirm = async (req, res)=>{
         console.log(error);
     }
 }
+
 const resetPassword = async (req,res) => {
     //send email with token
     const { email }= req.body

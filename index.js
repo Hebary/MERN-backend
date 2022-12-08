@@ -7,7 +7,8 @@ import projectRoutes from './routes/projectRoutes.js'
 import taskRoutes from './routes/taskRoutes.js'
 
 
-const app = express(); 
+const app = express();
+ 
 app.use(cors()); 
 
 app.use(express.json()); 
@@ -32,13 +33,8 @@ const server = app.listen(PORT, () => {
 import { Server } from "socket.io"
 
 const io = new Server(server,{
-    pingTimeout: 60000,
-    pingInterval: 25000,
     cors: {
         origin: '*',
-        methods: ['GET', 'POST'],
-        credentials: true
-        
     }
 });
 
