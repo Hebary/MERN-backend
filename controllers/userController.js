@@ -10,8 +10,8 @@ const registry = async (req,res) => {
     const userExists = await User.findOne({ email }); //email:email
     
     if (userExists) {
-        const error = new Error(`The user ${email} already exists`);
-        return res.status(400).send({ message:error.message});
+        const error = new Error(`User already exists`);
+        return res.status(400).send({ msg:error.message});
     }
     try {
         //create new user and give it an ID

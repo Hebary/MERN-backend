@@ -32,26 +32,27 @@ const server = app.listen(PORT, () => {
 //socket.io
 import { Server } from "socket.io"
 
-const io = new Server(server,{
+const io = new Server(server, {
+    pingTimeout: 60000,
     cors: {
         origin: '*',
     }
 });
 
 io.on("connection", (socket)=> {
-    console.log("connected to socket.io")
+    console.log("socket.io is connected")
     //Events socket io
     socket.on("open project", (projectId)=>{
         socket.join(projectId);
     });
 
 
-    socket.on("add task" ,(task) =>{       
+    socket.on("add task" ,(task) =>{     
         socket.to(task.project).emit("task added", task);
     });
 
     socket.on("delete task", (task)=>{
-        socket.to(task.project).emit("task deleted", task);
+        socket.to(task.project._id).emit("task deleted", task);
     })
 
     socket.on("update task", (task) =>{
@@ -61,7 +62,7 @@ io.on("connection", (socket)=> {
 
     socket.on("complete task", (task) => {
         const project = task.project;
-        socket.to(project).emit("completed task", task)
+        socket.to(project).emit("completed task", task);
     })
 
 });

@@ -14,6 +14,7 @@ const newProject = async (req,res) => {
         console.log(error);
     }
 }
+
 const getProjects = async (req, res) => {
     const projects = await Project.find({
         $or:[
@@ -39,7 +40,7 @@ const getOneProject = async (req, res) => {
     }
     
     if( project.creator.toString() !== req.user._id.toString() && 
-        !project.contributors.some(contrib=>contrib._id.toString()===req.user._id.toString())){
+        !project.contributors.some(contrib => contrib._id.toString() === req.user._id.toString())){
         const error = new Error('Unauthorized');
         return res.status(401).json({ msg: error.message });
     } 
@@ -58,7 +59,7 @@ const updateOneProject = async (req, res) => {
     }
     
     if( project.creator.toString() !== req.user._id.toString()){
-        const error = new Error('Unauthorized');
+        const error = new Error('Unauthorized, you are not the creator');
         return res.status(401).json({ message: error.message });
     } 
     
@@ -97,7 +98,7 @@ const deleteOneProject = async (req, res) => {
 }
 
 const findContributor = async (req,res) => {
-    const {email} = req.body;
+    const { email } = req.body;
     const user = await User.findOne({email}).select("-password -createdAt -confirmed -token -updatedAt -__v");
     if(!user){
         const error = new Error('User not found');
@@ -127,7 +128,7 @@ const addContributor = async (req, res) => {
         return res.status(404).json({ msg: error.message });
     }
 
-    if (project.creator.toString()=== user._id.toString()){
+    if (project.creator.toString() === user._id.toString()){
         const error = new Error("Creator can't be a contributor");
         return res.status(403).json({ msg: error.message });
     }
