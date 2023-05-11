@@ -144,6 +144,7 @@ const addContributor = async (req, res) => {
 }
 
 const deleteContributor = async (req, res) => {
+    
     const project = await Project.findById(req.params.id);
     
     if(!project){
@@ -156,7 +157,7 @@ const deleteContributor = async (req, res) => {
         return res.status(401).json({ msg: error.message });
     }
     //else can be deleted
-    project.contributors.pull(req.body.id)
+    project.contributors.filter( contrib => contrib.toString() !== req.body.id.toString());
     const savedProject = await project.save()
     res.json(savedProject);    
 }
