@@ -157,10 +157,10 @@ const deleteContributor = async (req, res) => {
         return res.status(401).json({ msg: error.message });
     }
     //else can be deleted
-    project.contributors.filter( contrib => contrib.toString() !== req.body.id.toString());
-    const savedProject = await project.save()
-    res.json(savedProject);    
-}
+    project.contributors.pull(req.body.id);
+    await project.save()
+    return res.status(200).json({msg:"contributor deleted success"});
+    }
 
 
 export {
