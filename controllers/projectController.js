@@ -157,8 +157,8 @@ const deleteContributor = async (req, res) => {
     }
     //else can be deleted
     project.contributors.pull(req.body.id)
-    await project.save()
-    res.json({ msg: 'Contributor deleted succesfully'})    
+    const savedProject = await project.save()
+    res.json(savedProject);    
 }
 
 

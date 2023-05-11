@@ -46,8 +46,7 @@ io.on("connection", (socket)=> {
         socket.join(projectId);
     });
 
-
-    socket.on("add task" ,(task) =>{     
+    socket.on("add task" , (task) =>{     
         socket.to(task.project).emit("task added", task);
     });
 
