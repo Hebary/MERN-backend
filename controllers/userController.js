@@ -17,14 +17,14 @@ const registry = async (req,res) => {
         //create new user and give it an ID
         const user = new User(req.body);
         user.token = generateID();
-        await user.save();
+        const dbUser = await user.save();
         //send email with token
         emailRegistry({
             email:user.email,
             name:user.name,
             token:user.token
         });
-        res.status(200).json({msg:"User created successfully"});
+        res.status(200).json(dbUser);
     } catch (err) {
         console.log(err);
     }
